@@ -1,0 +1,23 @@
+{
+  "name": "codeclan_week7_wknd_homework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "build": "webpack -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "first-person-controls": "^1.0.1",
+    "improved-noise": "0.0.3",
+    "three": "^0.96.0",
+    "three-orbit-controls": "^82.1.0",
+    "three-orbitcontrols": "^2.1.2"
+  }
+}
