@@ -26,7 +26,7 @@ BingApi.prototype.bindEvents = function () {
 
         this.parameters = event.detail[0];
         this.place = event.detail[1];
-
+        
 
         this.buildRequestUrl();
 
@@ -39,26 +39,30 @@ BingApi.prototype.bindEvents = function () {
 
 BingApi.prototype.makeRequest = function(){
 
+    console.log('BingApi: ', this.requestUrl);
+
     const request = new Request(this.requestUrl);
     request.get()
         .then((response) => {
 
+
             const resources = response.resourceSets[0].resources[0];
 
-            const place = {
-              name: this.place[0],
-              latlng: this.place[1],
-              areaWidth: this.place[2],
-              elevationScale: this.place[3],
-              zoom: resources.zoomLevel,
-              elevations: resources.elevations
-            };
 
-            const placeJSON = JSON.stringify(place);
-
-            const fileName = place.name.toLowerCase().split(" ").join("_") + '.json';
-            const downloader = new Downloader(fileName, placeJSON);
-            downloader.download();
+            // const place = {
+            //   name: this.place[0],
+            //   latlng: this.place[1],
+            //   areaWidth: this.place[2],
+            //   elevationScale: this.place[3],
+            //   zoom: resources.zoomLevel,
+            //   elevations: resources.elevations
+            // };
+            //
+            // const placeJSON = JSON.stringify(place);
+            //
+            // const fileName = place.name.toLowerCase().split(" ").join("_") + '.json';
+            // const downloader = new Downloader(fileName, placeJSON);
+            // downloader.download();
 
             PubSub.publish('BingApi:elevations-available', resources);
 
