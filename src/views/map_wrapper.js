@@ -161,14 +161,16 @@ MapWrapper.prototype.drawBoundingRect = function(){
         [this.boundingRect.se.lng, this.boundingRect.se.lat]
     ])
 
+    this.map.invalidateSize();
+
 
 };
 
 MapWrapper.prototype.centerMap = function(){
 
 
-
     this.map.setView(this.latLon, this.zoom);
+
 
 };
 
@@ -176,6 +178,7 @@ MapWrapper.prototype.setMarker = function(){
 
     this.marker.remove();
     this.marker = L.marker(this.latLon).addTo(this.map);
+    this.map.invalidateSize();
 };
 
 MapWrapper.prototype.mapClicked = function(event){
