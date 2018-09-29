@@ -28,6 +28,7 @@ MapWrapper.prototype.bindEvents = function(){
 
     PubSub.subscribe('Location:location-set', (event) => {
         this.latLon = event.detail;
+        console.log('MapWrapper:  Location:location-set', this.latLon);
         this.centerMap();
         this.setMarker();
     });
