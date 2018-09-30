@@ -13,7 +13,6 @@ const Location = function(latLon, offsetDistance){
 
     this.place = null;
 
-
 };
 
 Location.prototype.bindEvents = function(){
@@ -73,7 +72,6 @@ Location.prototype.setPlace = function(){
             PubSub.publish('Location:elevations-available', elevationData);
             PubSub.publish('Location:location-set', this.latLon);
             PubSub.publish('Location:area-width-set', this.offsetDistance);
-
 
         })
         .catch((error) => {

@@ -188,6 +188,4 @@ MapWrapper.prototype.mapClicked = function(event){
 
 };
 
-
-
 module.exports = MapWrapper;

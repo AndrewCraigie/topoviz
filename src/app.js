@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function(){
     elevationView.bindEvents();
 
 
-    //const elevationApiUrl = "http://dev.virtualearth.net/REST/v1/Elevation/";
     const elevationApiUrl = "https://dev.virtualearth.net/REST/v1/Elevation/";
     const apiKey = 'Ak3Le33PqOypsaz7G7cbXafcWI5Ibik80dXKCtnbMwCvZW0M9yc1tLZeFwijtrqw';
     const bingApi = new BingApi(elevationApiUrl, apiKey);
@@ -58,21 +57,15 @@ document.addEventListener('DOMContentLoaded', function(){
         ['Ngorongoro Crater', [-3.173948, 35.588702], 20000, 1, "ngorongoro_crater.json"],
         ['Mount Fogo', [14.939883, -24.379089], 15000, 1, "mount_fogo.json"],
         ['Mount St Helens', [46.200082, -122.187705], 3000, 3, "mount_st_helens.json"]
-
-
     ];
 
     const placesView = new PlacesView(mapControlsContainer, places);
     placesView.bindEvents();
 
 
-
     const mapContainer = document.querySelector('#map-container');
     const mapWrapper = new MapWrapper(mapContainer, startLocation, startZoom);
     mapWrapper.bindEvents();
-
-
-
 
 
 

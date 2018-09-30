@@ -32,8 +32,6 @@ AreaControls.prototype.areaWidthChange = function(event){
 
     PubSub.publish('AreaControls:area-width-change', this.areaWidth);
 
-
-
 };
 
 

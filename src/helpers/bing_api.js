@@ -15,18 +15,13 @@ const BingApi = function (url, apiKey) {
 
 };
 
-// http://dev.virtualearth.net/REST/v1/Elevation/Bounds?bounds=boundingBox&rows=rows&cols=cols&heights=heights&key=BingMapsKey
-// http://dev.virtualearth.net/REST/v1/Elevation/SeaLevel?points=lat1,long1,lat2,long2,latn,longn&key=BingMapsKey
-
-// bounds=45.219,-122.234,47.61,-122.07
-
 BingApi.prototype.bindEvents = function () {
 
     PubSub.subscribe('Location:request-elevation-data', (event) => {
 
         this.parameters = event.detail[0];
         this.place = event.detail[1];
-        
+
         this.buildRequestUrl();
         this.makeRequest();
 
@@ -40,7 +35,6 @@ BingApi.prototype.makeRequest = function(){
     const request = new Request(this.requestUrl);
     request.get()
         .then((response) => {
-
 
             const resources = response.resourceSets[0].resources[0];
 
