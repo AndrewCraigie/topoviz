@@ -27,19 +27,15 @@ BingApi.prototype.bindEvents = function () {
         this.parameters = event.detail[0];
         this.place = event.detail[1];
         
-
         this.buildRequestUrl();
-
         this.makeRequest();
 
-        // Publish response
     });
 
 };
 
 BingApi.prototype.makeRequest = function(){
 
-    console.log('BingApi: ', this.requestUrl);
 
     const request = new Request(this.requestUrl);
     request.get()

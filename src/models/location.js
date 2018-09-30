@@ -1,5 +1,6 @@
 const PubSub = require('../helpers/pub_sub');
 const LatLon = require('../helpers/lat_lon');
+const Request = require('../helpers/request');
 
 
 const Location = function(latLon, offsetDistance){
@@ -29,17 +30,7 @@ Location.prototype.bindEvents = function(){
     PubSub.subscribe('PlacesView:place-selected', (event) =>{
 
         this.place = event.detail;
-
-        const coords = this.place[1];
-
-        this.latLon = new LatLon(coords[0], coords[1]);
-        this.offsetDistance = this.place[2];
-
-        PubSub.publish('Location:z-scale-set', this.place[3]);
-
-        this.getBoundingRect();
-        this.getElevationData();
-        this.setLocation();
+        this.setPlace();
 
     });
 
@@ -51,6 +42,45 @@ Location.prototype.bindEvents = function(){
         this.setLocation();
 
     });
+};
+
+Location.prototype.setPlace = function(){
+
+
+    const placeJSONFile = this.place[4];
+
+    const placeRequestURL = "./data/" + placeJSONFile;
+
+    const placeRequest = new Request(placeRequestURL);
+    placeRequest.get()
+        .then((response) => {
+            console.log('PlaceRequest: ', response);
+
+            const coords = response.latlng;
+            this.latLon = new LatLon(coords[0], coords[1]);
+            this.offsetDistance = response.areaWidth;
+
+            const zScale = response.elevationScale;
+            PubSub.publish('Location:z-scale-set', zScale);
+
+            this.boundingRect = response.boundingRect;
+
+            const elevationData = {
+                elevations: response.elevations,
+                zoomLevel: response.zoom
+            };
+
+            PubSub.publish('Location:elevations-available', elevationData);
+            PubSub.publish('Location:location-set', this.latLon);
+            PubSub.publish('Location:area-width-set', this.offsetDistance);
+
+
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+
+
 };
 
 Location.prototype.getElevationData = function(){

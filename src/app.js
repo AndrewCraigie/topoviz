@@ -45,19 +45,19 @@ document.addEventListener('DOMContentLoaded', function(){
     location.bindEvents();
 
     const places = [
-        ['Mount Fuji', [35.362896, 138.730367], 7000, 1],
-        ['Niagra Falls', [43.082557, -79.074514], 1000, 12],
-        ['Crater Lake', [42.942645, -122.107659], 8000, 3],
-        ['Mount Everest', [27.980478, 86.920695], 20000, 12],
-        ['Mount Vesuvius', [40.820830, 14.425886], 4000, 3],
-        ['Grand Canyon', [36.075888, -112.028380], 20000, 1],
-        ['Uluru', [-25.344654, 131.037508], 2000, 5],
-        ['Easter Island', [-27.118031, -109.362453], 12000, 3],
-        ['Bingham Canyon Mine', [40.522902, -112.152245], 3000, 4],
-        ['Barringer Crater, Arizona', [35.027521, -111.022114], 1000, 7],
-        ['Ngorongoro Crater', [-3.173948, 35.588702], 20000, 1],
-        ['Mount Fogo', [14.939883, -24.379089], 15000, 1],
-        ['Mount St Helens', [46.200082, -122.187705], 3000, 3]
+        ['Mount Fuji', [35.362896, 138.730367], 7000, 1, "mount_fuji.json"],
+        ['Niagra Falls', [43.082557, -79.074514], 1000, 12, "niagra_falls.json"],
+        ['Crater Lake', [42.942645, -122.107659], 8000, 3, "crater_lake.json"],
+        ['Mount Everest', [27.980478, 86.920695], 20000, 12, "mount_everest.json"],
+        ['Mount Vesuvius', [40.820830, 14.425886], 4000, 3, "mount_vesuvius.json"],
+        ['Grand Canyon', [36.075888, -112.028380], 20000, 1, "grand_canyon.json"],
+        ['Uluru', [-25.344654, 131.037508], 2000, 5, "uluru.json"],
+        ['Easter Island', [-27.118031, -109.362453], 12000, 3, "easter_island.json"],
+        ['Bingham Canyon Mine', [40.522902, -112.152245], 3000, 4, "bingham_canyon_mine.json"],
+        ['Barringer Crater, Arizona', [35.027521, -111.022114], 1000, 7, "barringer_crater_arizona.json"],
+        ['Ngorongoro Crater', [-3.173948, 35.588702], 20000, 1, "ngorongoro_crater.json"],
+        ['Mount Fogo', [14.939883, -24.379089], 15000, 1, "mount_fogo.json"],
+        ['Mount St Helens', [46.200082, -122.187705], 3000, 3, "mount_st_helens.json"]
 
 
     ];

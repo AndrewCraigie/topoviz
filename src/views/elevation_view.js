@@ -35,10 +35,19 @@ ElevationView.prototype.bindEvents = function(){
     PubSub.subscribe('BingApi:elevations-available', (event) => {
 
         this.elevations = event.detail.elevations;
+        this.zoomLevel = event.detail.elevationScale;
+
+        this.calcMaxHeight();
+        this.buildView();
+
+    });
+
+    PubSub.subscribe('Location:elevations-available', (event) => {
+
+        this.elevations = event.detail.elevations;
         this.zoomLevel = event.detail.zoomLevel;
 
         this.calcMaxHeight();
-
         this.buildView();
 
     });
@@ -120,8 +129,8 @@ ElevationView.prototype.reverseWindingOrder = function(obj3D){
 
 
 ElevationView.prototype.generateTexture = function(data, width, height){
-    // bake lighting into texture
-    var canvas, canvasScaled, context, image, imageData, vector3, sun, shade;
+
+    let canvas, canvasScaled, context, image, imageData, vector3, sun, shade;
 
     vector3 = new THREE.Vector3( 0, 0, 0 );
 
@@ -140,7 +149,7 @@ ElevationView.prototype.generateTexture = function(data, width, height){
     image = context.getImageData( 0, 0, canvas.width, canvas.height );
     imageData = image.data;
 
-    for ( var i = 0, j = 0, l = imageData.length; i < l; i += 4, j ++ ) {
+    for ( let i = 0, j = 0, l = imageData.length; i < l; i += 4, j ++ ) {
         vector3.x = data[ j - 2 ] - data[ j + 2 ];
         vector3.y = 2;
         vector3.z = data[ j - this.width * 2 ] - data[ j + this.width * 2 ];
