@@ -53,7 +53,6 @@ Location.prototype.setPlace = function(){
     const placeRequest = new Request(placeRequestURL);
     placeRequest.get()
         .then((response) => {
-            console.log('PlaceRequest: ', response);
 
             const coords = response.latlng;
             this.latLon = new LatLon(coords[0], coords[1]);
@@ -62,16 +61,31 @@ Location.prototype.setPlace = function(){
             const zScale = response.elevationScale;
             PubSub.publish('Location:z-scale-set', zScale);
 
-            this.boundingRect = response.boundingRect;
 
             const elevationData = {
                 elevations: response.elevations,
                 zoomLevel: response.zoom
             };
 
+            // const sW = new LatLon(response.boundingRect.sw.lat, response.boundingRect.sw.lng);
+            // const sE = new LatLon(response.boundingRect.se.lat, response.boundingRect.se.lng);
+            // const nE = new LatLon(response.boundingRect.ne.lat, response.boundingRect.ne.lng);
+            // const nW = new LatLon(response.boundingRect.nw.lat, response.boundingRect.nw.lng);
+            //
+            // this.boundingRect = {
+            //     sw: sW,
+            //     se: sE,
+            //     ne: nE,
+            //     nw: nW
+            // };
+
+
+
             PubSub.publish('Location:elevations-available', elevationData);
-            PubSub.publish('Location:location-set', this.latLon);
-            PubSub.publish('Location:area-width-set', this.offsetDistance);
+
+            this.getBoundingRect();
+            this.setLocation();
+
 
         })
         .catch((error) => {

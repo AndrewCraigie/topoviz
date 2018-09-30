@@ -22,7 +22,7 @@ const MapWrapper = function(container, latLon, zoom){
 MapWrapper.prototype.bindEvents = function(){
 
     this.map.on('click', this.mapClicked);
-    this.map.on('zoomend', (event) => {
+    this.map.on('zoomed', (event) => {
         this.zoom = this.map.getZoom();
     });
 
@@ -130,7 +130,6 @@ MapWrapper.prototype.getBoundingRectJSON = function(){
 
 MapWrapper.prototype.drawBoundingRect = function(){
 
-
     this.featureStyle = {
         color: "#ff7800",
         weight: 5,
@@ -156,8 +155,8 @@ MapWrapper.prototype.drawBoundingRect = function(){
 
     this.map.fitBounds([
         [this.boundingRect.ne.lng, this.boundingRect.ne.lat],
-        [this.boundingRect.nw.lng,  this.boundingRect.nw.lat],
-        [this.boundingRect.sw.lng,  this.boundingRect.sw.lat],
+        [this.boundingRect.nw.lng, this.boundingRect.nw.lat],
+        [this.boundingRect.sw.lng, this.boundingRect.sw.lat],
         [this.boundingRect.se.lng, this.boundingRect.se.lat]
     ])
 
@@ -168,9 +167,7 @@ MapWrapper.prototype.drawBoundingRect = function(){
 
 MapWrapper.prototype.centerMap = function(){
 
-
     this.map.setView(this.latLon, this.zoom);
-
 
 };
 
