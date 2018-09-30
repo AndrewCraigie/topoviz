@@ -183,6 +183,14 @@ ElevationView.prototype.generateTexture = function(data, width, height){
 
 ElevationView.prototype.buildView = function(){
 
+    if (this.renderer) {
+        this.renderer.forceContextLoss();
+        this.renderer.context = null;
+        this.renderer.domElement = null;
+        this.renderer = null;
+    }
+
+
     const zScale = this.zScale;
 
 
